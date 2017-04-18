@@ -1,0 +1,35 @@
+Tema Aplikasi Tugas Besar
+"CINTA ALMAMATER"
+
+1. Aplikasi Absensi MHS dan Dosen
+2. Aplikasi Nilai
+3. Aplikasi Perpustakaan
+4. Aplikasi Keuangan
+5. Aplikasi Alumni
+6. Aplikasi Inventaris
+7. Aplikasi Alat Tulis Kantor
+
+Tugas:
+1. Merancang Desain Table
+	1.Table Master
+	2.Table Transaksi
+	3.Table Pendukung
+
+Hasil rancangan table didokumentasikan menggunakan MS-Word
+
+2. Membuat rancangan User Interface
+   Gunakan aplikasi Pencil atau Balsamic Morkup
+ 1.Menu
+ 2.Form Login
+ 3.Form CRUD Table Master
+	a.CRUD
+	b.Search
+	c.Export Data/Cetak Data
+	d.Paging
+ 4.Form CRUD Table Transaksi
+	a.CRUD
+	b.Search
+	c.Export Data/Cetak Data
+	d.Paging
+
+"nama supplier jadi kode suplier
