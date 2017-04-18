@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="akademik_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="akademik_dbModelStoreContainer">
+    <EntitySet Name="instruktur" EntityType="akademik_dbModel.Store.instruktur" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="mahasiswa" EntityType="akademik_dbModel.Store.mahasiswa" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="matakuliah" EntityType="akademik_dbModel.Store.matakuliah" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="nilai" EntityType="akademik_dbModel.Store.nilai" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pengajaran" EntityType="akademik_dbModel.Store.pengajaran" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="program" EntityType="akademik_dbModel.Store.program" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="users" EntityType="akademik_dbModel.Store.users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_mahasiswa_program" Association="akademik_dbModel.Store.FK_mahasiswa_program">
+      <End Role="program" EntitySet="program" />
+      <End Role="mahasiswa" EntitySet="mahasiswa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_matakuliah_program" Association="akademik_dbModel.Store.FK_matakuliah_program">
+      <End Role="program" EntitySet="program" />
+      <End Role="matakuliah" EntitySet="matakuliah" />
+    </AssociationSet>
+    <AssociationSet Name="FK_nilai_mahasiswa" Association="akademik_dbModel.Store.FK_nilai_mahasiswa">
+      <End Role="mahasiswa" EntitySet="mahasiswa" />
+      <End Role="nilai" EntitySet="nilai" />
+    </AssociationSet>
+    <AssociationSet Name="FK_nilai_pengajaran" Association="akademik_dbModel.Store.FK_nilai_pengajaran">
+      <End Role="pengajaran" EntitySet="pengajaran" />
+      <End Role="nilai" EntitySet="nilai" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pengajaran_instruktur" Association="akademik_dbModel.Store.FK_pengajaran_instruktur">
+      <End Role="instruktur" EntitySet="instruktur" />
+      <End Role="pengajaran" EntitySet="pengajaran" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pengajaran_matakuliah" Association="akademik_dbModel.Store.FK_pengajaran_matakuliah">
+      <End Role="matakuliah" EntitySet="matakuliah" />
+      <End Role="pengajaran" EntitySet="pengajaran" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="instruktur">
+    <Key>
+      <PropertyRef Name="kode_instruktur" />
+    </Key>
+    <Property Name="kode_instruktur" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="nama" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="alamat" Type="varchar" MaxLength="50" />
+    <Property Name="telp" Type="varchar" MaxLength="13" />
+  </EntityType>
+  <EntityType Name="mahasiswa">
+    <Key>
+      <PropertyRef Name="nim" />
+    </Key>
+    <Property Name="nim" Type="char" Nullable="false" MaxLength="10" />
+    <Property Name="kode_program" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="nama" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="tgl_lahir" Type="date" />
+    <Property Name="alamat" Type="varchar" MaxLength="50" />
+    <Property Name="telp" Type="varchar" MaxLength="13" />
+  </EntityType>
+  <EntityType Name="matakuliah">
+    <Key>
+      <PropertyRef Name="kode_matakuliah" />
+    </Key>
+    <Property Name="kode_matakuliah" Type="char" Nullable="false" MaxLength="5" />
+    <Property Name="kode_program" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="nama_matakuliah" Type="varchar" Nullable="false" MaxLength="35" />
+    <Property Name="sks" Type="tinyint" Nullable="false" />
+    <Property Name="semester" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="nilai">
+    <Key>
+      <PropertyRef Name="kode_nilai" />
+    </Key>
+    <Property Name="kode_nilai" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nim" Type="char" Nullable="false" MaxLength="10" />
+    <Property Name="kode_pengajaran" Type="int" Nullable="false" />
+    <Property Name="nilai" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pengajaran">
+    <Key>
+      <PropertyRef Name="kode_pengajaran" />
+    </Key>
+    <Property Name="kode_pengajaran" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="kode_instruktur" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="kode_matakuliah" Type="char" Nullable="false" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="program">
+    <Key>
+      <PropertyRef Name="kode_program" />
+    </Key>
+    <Property Name="kode_program" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="nama_program" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_mahasiswa_program">
+    <End Role="program" Type="akademik_dbModel.Store.program" Multiplicity="1" />
+    <End Role="mahasiswa" Type="akademik_dbModel.Store.mahasiswa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="program">
+        <PropertyRef Name="kode_program" />
+      </Principal>
+      <Dependent Role="mahasiswa">
+        <PropertyRef Name="kode_program" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_matakuliah_program">
+    <End Role="program" Type="akademik_dbModel.Store.program" Multiplicity="1" />
+    <End Role="matakuliah" Type="akademik_dbModel.Store.matakuliah" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="program">
+        <PropertyRef Name="kode_program" />
+      </Principal>
+      <Dependent Role="matakuliah">
+        <PropertyRef Name="kode_program" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_nilai_mahasiswa">
+    <End Role="mahasiswa" Type="akademik_dbModel.Store.mahasiswa" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="nilai" Type="akademik_dbModel.Store.nilai" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mahasiswa">
+        <PropertyRef Name="nim" />
+      </Principal>
+      <Dependent Role="nilai">
+        <PropertyRef Name="nim" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_nilai_pengajaran">
+    <End Role="pengajaran" Type="akademik_dbModel.Store.pengajaran" Multiplicity="1" />
+    <End Role="nilai" Type="akademik_dbModel.Store.nilai" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pengajaran">
+        <PropertyRef Name="kode_pengajaran" />
+      </Principal>
+      <Dependent Role="nilai">
+        <PropertyRef Name="kode_pengajaran" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pengajaran_instruktur">
+    <End Role="instruktur" Type="akademik_dbModel.Store.instruktur" Multiplicity="1" />
+    <End Role="pengajaran" Type="akademik_dbModel.Store.pengajaran" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="instruktur">
+        <PropertyRef Name="kode_instruktur" />
+      </Principal>
+      <Dependent Role="pengajaran">
+        <PropertyRef Name="kode_instruktur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pengajaran_matakuliah">
+    <End Role="matakuliah" Type="akademik_dbModel.Store.matakuliah" Multiplicity="1" />
+    <End Role="pengajaran" Type="akademik_dbModel.Store.pengajaran" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="matakuliah">
+        <PropertyRef Name="kode_matakuliah" />
+      </Principal>
+      <Dependent Role="pengajaran">
+        <PropertyRef Name="kode_matakuliah" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="HapusInstruktur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kode_instruktur" Type="char" Mode="In" />
+  </Function>
+  <Function Name="HapusMahasiswa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nim" Type="char" Mode="In" />
+  </Function>
+  <Function Name="HapusMatakuliah" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kode_matakuliah" Type="char" Mode="In" />
+  </Function>
+  <Function Name="TambahInstruktur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kode_instruktur" Type="char" Mode="In" />
+    <Parameter Name="nama" Type="varchar" Mode="In" />
+    <Parameter Name="alamat" Type="varchar" Mode="In" />
+    <Parameter Name="telp" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="TambahMahasiswa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nim" Type="char" Mode="In" />
+    <Parameter Name="kode_program" Type="char" Mode="In" />
+    <Parameter Name="nama" Type="varchar" Mode="In" />
+    <Parameter Name="tgl_lahir" Type="date" Mode="In" />
+    <Parameter Name="alamat" Type="varchar" Mode="In" />
+    <Parameter Name="telp" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="TambahMatakuliah" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kode_matakuliah" Type="char" Mode="In" />
+    <Parameter Name="kode_program" Type="char" Mode="In" />
+    <Parameter Name="nama_matakuliah" Type="varchar" Mode="In" />
+    <Parameter Name="sks" Type="tinyint" Mode="In" />
+    <Parameter Name="semester" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="TampilInstruktur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TampilMahasiswa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TampilMatakuliah" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UbahInstruktur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kode_instruktur" Type="char" Mode="In" />
+    <Parameter Name="nama" Type="varchar" Mode="In" />
+    <Parameter Name="alamat" Type="varchar" Mode="In" />
+    <Parameter Name="telp" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UbahMahasiswa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nim" Type="char" Mode="In" />
+    <Parameter Name="kode_program" Type="char" Mode="In" />
+    <Parameter Name="nama" Type="varchar" Mode="In" />
+    <Parameter Name="tgl_lahir" Type="date" Mode="In" />
+    <Parameter Name="alamat" Type="varchar" Mode="In" />
+    <Parameter Name="telp" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UbahMatakuliah" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kode_matakuliah" Type="char" Mode="In" />
+    <Parameter Name="kode_program" Type="char" Mode="In" />
+    <Parameter Name="nama_matakuliah" Type="varchar" Mode="In" />
+    <Parameter Name="sks" Type="tinyint" Mode="In" />
+    <Parameter Name="semester" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+</Schema>

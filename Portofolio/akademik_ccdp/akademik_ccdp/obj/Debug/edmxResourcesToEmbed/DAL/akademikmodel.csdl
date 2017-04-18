@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="akademik_dbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="akademik_dbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="instrukturs" EntityType="akademik_dbModel.instruktur" />
+    <EntitySet Name="mahasiswas" EntityType="akademik_dbModel.mahasiswa" />
+    <EntitySet Name="matakuliahs" EntityType="akademik_dbModel.matakuliah" />
+    <EntitySet Name="nilais" EntityType="akademik_dbModel.nilai" />
+    <EntitySet Name="pengajarans" EntityType="akademik_dbModel.pengajaran" />
+    <EntitySet Name="programs" EntityType="akademik_dbModel.program" />
+    <AssociationSet Name="FK_pengajaran_instruktur" Association="akademik_dbModel.FK_pengajaran_instruktur">
+      <End Role="instruktur" EntitySet="instrukturs" />
+      <End Role="pengajaran" EntitySet="pengajarans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mahasiswa_program" Association="akademik_dbModel.FK_mahasiswa_program">
+      <End Role="program" EntitySet="programs" />
+      <End Role="mahasiswa" EntitySet="mahasiswas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_nilai_mahasiswa" Association="akademik_dbModel.FK_nilai_mahasiswa">
+      <End Role="mahasiswa" EntitySet="mahasiswas" />
+      <End Role="nilai" EntitySet="nilais" />
+    </AssociationSet>
+    <AssociationSet Name="FK_matakuliah_program" Association="akademik_dbModel.FK_matakuliah_program">
+      <End Role="program" EntitySet="programs" />
+      <End Role="matakuliah" EntitySet="matakuliahs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pengajaran_matakuliah" Association="akademik_dbModel.FK_pengajaran_matakuliah">
+      <End Role="matakuliah" EntitySet="matakuliahs" />
+      <End Role="pengajaran" EntitySet="pengajarans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_nilai_pengajaran" Association="akademik_dbModel.FK_nilai_pengajaran">
+      <End Role="pengajaran" EntitySet="pengajarans" />
+      <End Role="nilai" EntitySet="nilais" />
+    </AssociationSet>
+    <FunctionImport Name="HapusMahasiswa">
+      <Parameter Name="nim" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TambahMahasiswa" ReturnType="Collection(Decimal)">
+      <Parameter Name="nim" Mode="In" Type="String" />
+      <Parameter Name="kode_program" Mode="In" Type="String" />
+      <Parameter Name="nama" Mode="In" Type="String" />
+      <Parameter Name="tgl_lahir" Mode="In" Type="DateTime" />
+      <Parameter Name="alamat" Mode="In" Type="String" />
+      <Parameter Name="telp" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TampilMahasiswa" ReturnType="Collection(akademik_dbModel.TampilMahasiswa_Result)" />
+    <FunctionImport Name="UbahMahasiswa">
+      <Parameter Name="nim" Mode="In" Type="String" />
+      <Parameter Name="kode_program" Mode="In" Type="String" />
+      <Parameter Name="nama" Mode="In" Type="String" />
+      <Parameter Name="tgl_lahir" Mode="In" Type="DateTime" />
+      <Parameter Name="alamat" Mode="In" Type="String" />
+      <Parameter Name="telp" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TampilMahasiswa1" EntitySet="mahasiswas" ReturnType="Collection(akademik_dbModel.mahasiswa)" />
+    <FunctionImport Name="HapusInstruktur">
+      <Parameter Name="kode_instruktur" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TambahInstruktur" ReturnType="Collection(Decimal)">
+      <Parameter Name="kode_instruktur" Mode="In" Type="String" />
+      <Parameter Name="nama" Mode="In" Type="String" />
+      <Parameter Name="alamat" Mode="In" Type="String" />
+      <Parameter Name="telp" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TampilInstruktur" ReturnType="Collection(akademik_dbModel.TampilInstruktur_Result)" />
+    <FunctionImport Name="UbahInstruktur">
+      <Parameter Name="kode_instruktur" Mode="In" Type="String" />
+      <Parameter Name="nama" Mode="In" Type="String" />
+      <Parameter Name="alamat" Mode="In" Type="String" />
+      <Parameter Name="telp" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TampilInstruktur1" EntitySet="instrukturs" ReturnType="Collection(akademik_dbModel.instruktur)" />
+    <FunctionImport Name="HapusMatakuliah">
+      <Parameter Name="kode_matakuliah" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TambahMatakuliah" ReturnType="Collection(Decimal)">
+      <Parameter Name="kode_matakuliah" Mode="In" Type="String" />
+      <Parameter Name="kode_program" Mode="In" Type="String" />
+      <Parameter Name="nama_matakuliah" Mode="In" Type="String" />
+      <Parameter Name="sks" Mode="In" Type="Byte" />
+      <Parameter Name="semester" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="TampilMatakuliah" ReturnType="Collection(akademik_dbModel.TampilMatakuliah_Result)" />
+    <FunctionImport Name="UbahMatakuliah">
+      <Parameter Name="kode_matakuliah" Mode="In" Type="String" />
+      <Parameter Name="kode_program" Mode="In" Type="String" />
+      <Parameter Name="nama_matakuliah" Mode="In" Type="String" />
+      <Parameter Name="sks" Mode="In" Type="Byte" />
+      <Parameter Name="semester" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="TampilMatakuliah1" EntitySet="matakuliahs" ReturnType="Collection(akademik_dbModel.matakuliah)" />
+    <FunctionImport Name="Validate_User" ReturnType="Collection(Int32)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ValidateUser" ReturnType="Collection(Int32)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="users" EntityType="akademik_dbModel.user" />
+  </EntityContainer>
+  <EntityType Name="instruktur">
+    <Key>
+      <PropertyRef Name="kode_instruktur" />
+    </Key>
+    <Property Name="kode_instruktur" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="true" />
+    <Property Name="nama" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+    <Property Name="alamat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="telp" Type="String" MaxLength="13" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="pengajarans" Relationship="akademik_dbModel.FK_pengajaran_instruktur" FromRole="instruktur" ToRole="pengajaran" />
+  </EntityType>
+  <EntityType Name="mahasiswa">
+    <Key>
+      <PropertyRef Name="nim" />
+    </Key>
+    <Property Name="nim" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="kode_program" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="true" />
+    <Property Name="nama" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+    <Property Name="tgl_lahir" Type="DateTime" Precision="0" />
+    <Property Name="alamat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="telp" Type="String" MaxLength="13" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="program" Relationship="akademik_dbModel.FK_mahasiswa_program" FromRole="mahasiswa" ToRole="program" />
+    <NavigationProperty Name="nilais" Relationship="akademik_dbModel.FK_nilai_mahasiswa" FromRole="mahasiswa" ToRole="nilai" />
+  </EntityType>
+  <EntityType Name="matakuliah">
+    <Key>
+      <PropertyRef Name="kode_matakuliah" />
+    </Key>
+    <Property Name="kode_matakuliah" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="true" />
+    <Property Name="kode_program" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="true" />
+    <Property Name="nama_matakuliah" Type="String" Nullable="false" MaxLength="35" Unicode="false" FixedLength="false" />
+    <Property Name="sks" Type="Byte" Nullable="false" />
+    <Property Name="semester" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="program" Relationship="akademik_dbModel.FK_matakuliah_program" FromRole="matakuliah" ToRole="program" />
+    <NavigationProperty Name="pengajarans" Relationship="akademik_dbModel.FK_pengajaran_matakuliah" FromRole="matakuliah" ToRole="pengajaran" />
+  </EntityType>
+  <EntityType Name="nilai">
+    <Key>
+      <PropertyRef Name="kode_nilai" />
+    </Key>
+    <Property Name="kode_nilai" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nim" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="kode_pengajaran" Type="Int32" Nullable="false" />
+    <Property Name="nilai1" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="mahasiswa" Relationship="akademik_dbModel.FK_nilai_mahasiswa" FromRole="nilai" ToRole="mahasiswa" />
+    <NavigationProperty Name="pengajaran" Relationship="akademik_dbModel.FK_nilai_pengajaran" FromRole="nilai" ToRole="pengajaran" />
+  </EntityType>
+  <EntityType Name="pengajaran">
+    <Key>
+      <PropertyRef Name="kode_pengajaran" />
+    </Key>
+    <Property Name="kode_pengajaran" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="kode_instruktur" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="true" />
+    <Property Name="kode_matakuliah" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="instruktur" Relationship="akademik_dbModel.FK_pengajaran_instruktur" FromRole="pengajaran" ToRole="instruktur" />
+    <NavigationProperty Name="matakuliah" Relationship="akademik_dbModel.FK_pengajaran_matakuliah" FromRole="pengajaran" ToRole="matakuliah" />
+    <NavigationProperty Name="nilais" Relationship="akademik_dbModel.FK_nilai_pengajaran" FromRole="pengajaran" ToRole="nilai" />
+  </EntityType>
+  <EntityType Name="program">
+    <Key>
+      <PropertyRef Name="kode_program" />
+    </Key>
+    <Property Name="kode_program" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="true" />
+    <Property Name="nama_program" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="mahasiswas" Relationship="akademik_dbModel.FK_mahasiswa_program" FromRole="program" ToRole="mahasiswa" />
+    <NavigationProperty Name="matakuliahs" Relationship="akademik_dbModel.FK_matakuliah_program" FromRole="program" ToRole="matakuliah" />
+  </EntityType>
+  <Association Name="FK_pengajaran_instruktur">
+    <End Role="instruktur" Type="akademik_dbModel.instruktur" Multiplicity="1" />
+    <End Role="pengajaran" Type="akademik_dbModel.pengajaran" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="instruktur">
+        <PropertyRef Name="kode_instruktur" />
+      </Principal>
+      <Dependent Role="pengajaran">
+        <PropertyRef Name="kode_instruktur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mahasiswa_program">
+    <End Role="program" Type="akademik_dbModel.program" Multiplicity="1" />
+    <End Role="mahasiswa" Type="akademik_dbModel.mahasiswa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="program">
+        <PropertyRef Name="kode_program" />
+      </Principal>
+      <Dependent Role="mahasiswa">
+        <PropertyRef Name="kode_program" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_nilai_mahasiswa">
+    <End Role="mahasiswa" Type="akademik_dbModel.mahasiswa" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="nilai" Type="akademik_dbModel.nilai" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mahasiswa">
+        <PropertyRef Name="nim" />
+      </Principal>
+      <Dependent Role="nilai">
+        <PropertyRef Name="nim" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_matakuliah_program">
+    <End Role="program" Type="akademik_dbModel.program" Multiplicity="1" />
+    <End Role="matakuliah" Type="akademik_dbModel.matakuliah" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="program">
+        <PropertyRef Name="kode_program" />
+      </Principal>
+      <Dependent Role="matakuliah">
+        <PropertyRef Name="kode_program" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pengajaran_matakuliah">
+    <End Role="matakuliah" Type="akademik_dbModel.matakuliah" Multiplicity="1" />
+    <End Role="pengajaran" Type="akademik_dbModel.pengajaran" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="matakuliah">
+        <PropertyRef Name="kode_matakuliah" />
+      </Principal>
+      <Dependent Role="pengajaran">
+        <PropertyRef Name="kode_matakuliah" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_nilai_pengajaran">
+    <End Role="pengajaran" Type="akademik_dbModel.pengajaran" Multiplicity="1" />
+    <End Role="nilai" Type="akademik_dbModel.nilai" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pengajaran">
+        <PropertyRef Name="kode_pengajaran" />
+      </Principal>
+      <Dependent Role="nilai">
+        <PropertyRef Name="kode_pengajaran" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="TampilMahasiswa_Result">
+    <Property Type="String" Name="nim" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="kode_program" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="nama" Nullable="false" MaxLength="45" />
+    <Property Type="DateTime" Name="tgl_lahir" Nullable="true" />
+    <Property Type="String" Name="alamat" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="telp" Nullable="true" MaxLength="13" />
+  </ComplexType>
+  <ComplexType Name="TampilInstruktur_Result">
+    <Property Type="String" Name="kode_instruktur" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="nama" Nullable="false" MaxLength="45" />
+    <Property Type="String" Name="alamat" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="telp" Nullable="true" MaxLength="13" />
+  </ComplexType>
+  <ComplexType Name="TampilMatakuliah_Result">
+    <Property Type="String" Name="kode_matakuliah" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="kode_program" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="nama_matakuliah" Nullable="false" MaxLength="35" />
+    <Property Type="Byte" Name="sks" Nullable="false" />
+    <Property Type="Byte" Name="semester" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Type="Int32" Name="userid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,140 @@
+#canvas{
+	width: 960px;
+	margin: 0 auto;
+	border: 1px solid silver;
+}
+
+#header{
+	font-family: castellar;
+	font-size: 20px;
+	padding: 20px;
+	background-color: #33ff00;
+	text-align: left-side;
+}
+
+#menu{
+	background-color: #0066ff;
+	font-family: algerian;
+}
+#menu ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#menu ul li.utama{
+	display: inline-table;
+}
+#menu ul li:hover{
+	background-color: #0033cc;
+}
+#menu ul li a{
+	display: block;
+	text-decoration: none;
+	line-height: 40px;
+	padding: 0 10px;
+	color: #fff;
+}
+.utama ul{
+	display: none;
+	position: absolute;
+	z-index: 2;
+}
+.utama:hover ul{
+	display: block;
+}
+.utama ul li{
+	display: block;
+	background-color: #6cf;
+}
+
+#isi{
+	background-color: white;
+	min-height: 400px;
+	padding: 20px;
+}
+
+#footer{
+	text-align: center;
+	padding: 20px;
+	background-color: #ccc;
+}
+
+#utama{
+	width: 300px;
+	
+}
+
+#judul{
+	padding: 15px;
+	text-align: center;
+	color: black;
+	font-size: 20px;
+	background-color: yellow;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom: 3px solid #336666;
+}
+
+#inputan{
+	background-color: #6d88af;
+	padding: 20px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+input{
+	padding: 10px;
+	border: 0;
+}
+
+.lg{
+	width: 200px
+}
+
+.btn{
+	background-color: yellow;
+	border-radius: 10px;
+	color: black;
+}
+.btn:hover{
+	background-color: #336666
+	cursor: pointer;
+}
+
+#comment {
+margin:20px 0 0 20px;
+border: 2px solid #848484;
+border-radius:20px;
+-moz-border-radius:20px;
+max-height: 90%;
+font-weight: bold;
+color: #606060;
+padding: 10px;
+width: 440px;
+background-color: #dcdcdc;
+}
+#publishcomment {
+border: 2px solid #848484;
+box-shadow: 12px 12px 7px #888888;
+margin: 30px 0 50px 20px;
+padding: 10px;
+max-height: 100%;
+color: #3d3d3d;
+width: 550px;
+font-size: 12px;
+line-height: 15px;
+}
+#publishcomment hr {
+color: #ccc;
+}
+#publishcomment a {
+color: #da5700;
+text-decoration: none;
+font-weight:normal;
+}
+#publishcomment a:link {
+font-weight: bold;
+}
+#publishcomment a:hover {
+text-decoration: underline;
+}
